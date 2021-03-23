@@ -1,0 +1,29 @@
+.wallet-wrap {
+    margin-left: 0.2rem;
+    width: 20%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-collapse: collapse;
+    
+    .wallet__lists {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        div {
+            margin: 0.5rem;
+            padding: 1rem;
+            border: 1px solid black;
+        }
+    }
+    
+    .wallet__list {
+        display: flex;
+        flex: 1 1 50%;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
