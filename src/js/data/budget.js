@@ -1,34 +1,12 @@
-export const defaultBudget = [
-  {
-    won: 10000,
-    count: 3,
+export const initialBudget = {
+  myMoney: {
+    10000: 2,
+    5000: 1,
+    1000: 2,
+    500: 3,
+    100: 2,
+    50: 3,
+    10: 0,
   },
-  {
-    id: 5000,
-    count: 1,
-  },
-  {
-    won: 1000,
-    count: 2,
-  },
-  {
-    id: 500,
-    count: 3,
-  },
-  {
-    won: 100,
-    count: 2,
-  },
-  {
-    id: 50,
-    count: 3,
-  },
-  {
-    won: 10,
-    count: 5,
-  },
-  {
-    id: 10,
-    count: 0,
-  },
-];
+  currentInsertMoney: 0,
+};

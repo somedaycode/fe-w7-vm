@@ -5,22 +5,30 @@
     .products {
         display: flex;
         flex-wrap: wrap;
-
+        justify-content: space-evenly;
     }
 
     .product {
-        flex: 1 1 25%;
-        height: 5rem;
-        padding: 1rem;
-        
-        
+        margin: 1rem 0;
+        width: 8rem;
+        height: 8rem;
     }
     
     .product__name {
+        width: 85%;
+        height: 70%;
         margin: 0.5rem;
         padding: 1rem;
         outline: 0;
         background-color: transparent;
+        cursor: pointer;
+    }
+    
+    .available {
+        border: 1px solid red;
     }
 
+    .available:active {
+        transform: scale(1.1);
+    }
 }
