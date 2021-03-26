@@ -1,12 +1,15 @@
 import { insertTemplate, _, debounce } from '../util.js';
-import { makeWalletTemplate, makeTotalBudgetTemplate } from '../templates/HTMLTemplates.js';
+import {
+  makeWalletTemplate,
+  makeTotalBudgetTemplate,
+} from '../templates/HTMLTemplates.js';
 
 class WalletView {
   constructor({ walletLists, budget }, walletModel) {
     this.$walletArea = walletLists;
     this.$budget = budget;
     this.walletModel = walletModel;
-    this.debounceReturnMoney = this.hasNoInteration();
+    this.walletModel.debounceReturnMoney = this.hasNoInteration();
     this.currentMoneyUnit;
     this.init();
   }
@@ -19,19 +22,22 @@ class WalletView {
 
   renderDefaultWallet() {
     const wallet = this.walletModel.budget.myMoney;
-    const myMoney = this.changeTypeObjToArr(wallet)
+    const myMoney = this.changeTypeObjToArr(wallet);
     const walletTemplate = myMoney.reduce((prev, [money, count]) => {
       const template = makeWalletTemplate(money, count);
-      return prev += template;
+      return (prev += template);
     }, '');
     const totalBudget = this.walletModel.getTotalBudget();
-    const totalBudgetTemplete = makeTotalBudgetTemplate(totalBudget);
+    const totalBudgetTemplate = makeTotalBudgetTemplate(totalBudget);
     insertTemplate(this.$walletArea, 'beforeend', walletTemplate);
-    insertTemplate(this.$budget, 'beforeend', totalBudgetTemplete);
+    insertTemplate(this.$budget, 'beforeend', totalBudgetTemplate);
   }
 
   changeTypeObjToArr(wallet) {
-    const myMoney = Object.keys(wallet).map(moneyType => [Number(moneyType), wallet[moneyType]]);
+    const myMoney = Object.keys(wallet).map((moneyType) => [
+      Number(moneyType),
+      wallet[moneyType],
+    ]);
     return myMoney;
   }
 
@@ -40,15 +46,13 @@ class WalletView {
   }
 
   handleClickWalletArea({ target }) {
-    if(!target.closest('.money__button')) return;
+    if (!target.closest('.money__button')) return;
     const budget = this.walletModel.budget;
     const money = this.getMoneyUnit(target);
-    if(this.walletModel.isMoneyCountZero(budget, money)) return;
+    if (this.walletModel.isMoneyCountZero(budget, money)) return;
     this.currentMoneyUnit = money;
-    this.walletModel.useMoney(money);
-    this.walletModel.insertMoney(money);
-    this.walletModel.notify(budget, money);
-    this.debounceReturnMoney();
+    this.walletModel.updateMyBudget(money);
+    this.walletModel.debounceReturnMoney();
   }
 
   getMoneyUnit(target) {
@@ -76,7 +80,7 @@ class WalletView {
     })[0];
     const clickedMoneyCount = clickedMoneyUnit.nextElementSibling;
     const currentMoneyUnitCount = this.walletModel.getMoneyCount(money);
-    clickedMoneyCount.textContent = `${currentMoneyUnitCount}개`;  
+    clickedMoneyCount.textContent = `${currentMoneyUnitCount}개`;
   }
 
   changeAmountOfMoney() {
@@ -93,4 +97,4 @@ class WalletView {
   }
 }
 
-export { WalletView }
+export { WalletView };

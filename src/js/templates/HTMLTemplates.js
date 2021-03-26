@@ -23,4 +23,12 @@ const makeTotalBudgetTemplate = (totalBudget) => {
   `
 }
 
-export { productsTemplate, makeWalletTemplate, makeTotalBudgetTemplate };
+
+const makeProcessTemplate = (action, contents) => {
+  if(action = 'insert') return `<span>${contents}원 투입!</span>`;
+  if(action = 'return') return `<span>${contents}원 반환!</span>`;
+  if(action = 'selectProduct') return `<span>${contents}을(를) 선택</span>`;
+  if(action = 'eject') return `<span>${contents}이(가) 나왔다!</span>`;
+}
+
+export { productsTemplate, makeWalletTemplate, makeTotalBudgetTemplate, makeProcessTemplate };
